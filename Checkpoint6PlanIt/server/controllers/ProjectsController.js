@@ -60,3 +60,4 @@ export class ProjectController extends BaseController {
                 next(error)
             }
         }
+}
