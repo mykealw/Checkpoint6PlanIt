@@ -13,8 +13,7 @@ class ProjectsService {
     return project
   }
   async  getProjectById(id) {
-    //  <!-- do we need a populate?? -->
-    const project = await dbContext.Projects.findById(id) 
+    const project = await dbContext.Projects.findById(id).populate('creator', 'name')
         if (!project) {
             throw new BadRequest('Invalid Id')
         }

@@ -3,7 +3,7 @@ import BaseController from "../utils/BaseController.js";
 
 export class SprintsController extends BaseController{
     constructor(){
-        super('api/sprints')
+        super('api/projects/:projectId/sprints')
         this.router
         .post('', this.createSprint)
         .delete('/:id', this.deleteSprint)
