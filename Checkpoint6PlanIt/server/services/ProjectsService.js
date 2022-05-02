@@ -9,18 +9,18 @@ class ProjectsService {
   }
   async createProject(body) {
     const project = await dbContext.Projects.create(body)
-    await project.populate('creator', 'name')
+    await project.populate('creator', 'name picture')
     return project
   }
   async getProjectById(id) {
-    const project = await dbContext.Projects.findById(id).populate('creator', 'name')
+    const project = await dbContext.Projects.findById(id).populate('creator', 'name picture')
     if (!project) {
       throw new BadRequest('Invalid Id')
     }
     return project
   }
   async getAllProjects() {
-    const projects = await dbContext.Projects.find({})
+    const projects = await dbContext.Projects.find({}).populate('creator', 'name picture')
     return projects
   }
 

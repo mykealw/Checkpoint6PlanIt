@@ -1,3 +1,4 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { notesService } from "../services/NotesService.js";
 import BaseController from "../utils/BaseController.js";
 
@@ -5,6 +6,7 @@ export class NotesController extends BaseController {
     constructor() {
         super('api/projects/:projectId/notes')
         this.router
+            .use(Auth0Provider.getAuthorizedUserInfo)
             .delete('/:id', this.deleteNote)
 
     }
