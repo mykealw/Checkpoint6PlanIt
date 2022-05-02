@@ -1,4 +1,3 @@
-import { get } from "express/lib/response";
 import { notesService } from "../services/NotesService.js";
 import { projectsService } from "../services/ProjectsService.js";
 import { sprintsService } from "../services/SprintsService.js";
@@ -21,11 +20,13 @@ export class ProjectController extends BaseController {
         try {
             const tasks = await tasksService.getTasksByProject(req.params.projectId)
             res.send(tasks)
-                .get('/:projectId/notes', this.getNotesByProject)
-                .delete('/:id', this.deleteProject)
+        }
+        catch (error) {
+            next(error)
+        }
 
-        }
     }
+
     async getSprintsByProject(req, res, next) {
         try {
             const sprints = await sprintsService.getSprintsByProject(req.params.projectId)
@@ -35,15 +36,7 @@ export class ProjectController extends BaseController {
             next(error)
         }
     }
-    async getSprintsByProject(req, res, next) {
-        try {
-            const sprints = await sprintsService.getSprintsByProject(req.params.projectId)
-            res.send(sprints)
-        }
-        catch (error) {
-            next(error)
-        }
-    }
+
     async getNotesByProject(req, res, next) {
         try {
             const notes = await notesService.getNotesByProject(req.params.projectId)
