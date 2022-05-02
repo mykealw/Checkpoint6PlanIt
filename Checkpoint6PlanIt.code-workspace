@@ -2,12 +2,12 @@
 {
   "folders": [
     {
-      "path": "Checkpoint6PlanIt.client",
-      "name": "client"
+      "name": "server",
+      "path": "Checkpoint6PlanIt"
     },
     {
-      "path": "Checkpoint6PlanIt",
-      "name": "server"
+      "name": "client",
+      "path": "Checkpoint6PlanIt.client"
     }
   ],
   "settings": {

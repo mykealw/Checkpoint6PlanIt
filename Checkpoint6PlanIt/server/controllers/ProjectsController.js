@@ -1,13 +1,15 @@
+import { Auth0Provider } from "@bcwdev/auth0provider";
 import { notesService } from "../services/NotesService.js";
 import { projectsService } from "../services/ProjectsService.js";
 import { sprintsService } from "../services/SprintsService.js";
 import { tasksService } from "../services/TasksService.js";
 import BaseController from '../utils/BaseController.js'
 
-export class ProjectController extends BaseController {
+export class ProjectsController extends BaseController {
     constructor() {
         super('api/projects')
         this.router
+            .use(Auth0Provider.getAuthorizedUserInfo)
             .post('', this.createProject)
             .get('', this.getAllProjects)
             .get('/:id', this.getProjectById)

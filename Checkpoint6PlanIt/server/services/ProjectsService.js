@@ -9,7 +9,7 @@ class ProjectsService {
   }
   async createProject(body) {
     const project = await dbContext.Projects.create(body)
-    // populate?? 
+    await project.populate('creator', 'name')
     return project
   }
   async getProjectById(id) {
