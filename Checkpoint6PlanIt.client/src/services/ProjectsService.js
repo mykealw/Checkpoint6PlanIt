@@ -10,8 +10,9 @@ class ProjectsService {
         // logger.log(res.data, "this is new project")
         AppState.projects = AppState.projects.push(res.data)
     }
-    async getProjectsById() {
+    async getMyProjects() {
         const res = await api.get('api/projects')
+        AppState.projects = res.data
         logger.log(res.data, "this is the projects")
     }
 

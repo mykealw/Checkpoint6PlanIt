@@ -28,7 +28,7 @@
     </div>
     <hr />
     <div class="row">
-      <!-- <AllProjects /> -->
+      <AllProjects v-for="p in projects" :key="p.id" :project="p" />
     </div>
   </div>
   <Modal id="create-project">
@@ -52,7 +52,7 @@ export default {
 
     onMounted(async () => {
       try {
-        await projectsService.getProjectsById()
+        await projectsService.getMyProjects()
       } catch (error) {
         logger.log(error)
         Pop.toast(error.message, "error")

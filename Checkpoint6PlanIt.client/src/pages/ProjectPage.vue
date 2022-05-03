@@ -1,28 +1,24 @@
 <template>
-<div class="row">
-
-    <div class="col-md-1">
-        TABS
-    </div>
+  <div class="row">
+    <div class="col-md-1">TABS</div>
     <div class="col-md-10">
-        <Project />
+      <!-- <Project /> -->
     </div>
     <div class="col-md-1"></div>
-</div>
-    <OffCanvas />
+  </div>
+  <!-- <OffCanvas /> -->
 </template>
 
 
 <script>
 import { useRouter } from 'vue-router'
 export default {
-    setup(){
-        return {}
-    }
+  setup() {
+    return {}
+  }
 }
 </script>
 
 
 <style lang="scss" scoped>
-
 </style>
