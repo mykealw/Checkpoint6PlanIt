@@ -38,8 +38,33 @@
 </template>
 
 <script>
+import { computed, onMounted } from '@vue/runtime-core'
+import { logger } from '../utils/Logger.js'
+import Pop from '../utils/Pop.js'
+import { projectsService } from '../services/ProjectsService.js'
+import { useRoute } from 'vue-router'
+import { AppState } from '../AppState.js'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  // const route = useRoute(),
+  setup() {
+
+    onMounted(async () => {
+      try {
+        await projectsService.getProjectsById()
+      } catch (error) {
+        logger.log(error)
+        Pop.toast(error.message, "error")
+      }
+    });
+    return {
+      // route,
+      account: computed(() => AppState.account),
+      user: computed(() => AppState.user),
+      projects: computed(() => AppState.projects)
+    }
+  }
 }
 </script>
 

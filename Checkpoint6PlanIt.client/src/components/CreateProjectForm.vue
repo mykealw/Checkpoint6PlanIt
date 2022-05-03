@@ -4,6 +4,7 @@
       <div class="mb-3">
         <label for="ProjectName" class="visually-hidden form-label"></label>
         <input
+          v-model="newProject.name"
           type="text"
           class="form-control"
           name="ProjectName"
@@ -20,6 +21,7 @@
           class="form-label visually-hidden"
         ></label>
         <textarea
+          v-model="newProject.description"
           class="form-control"
           name="ProjectDescription"
           id="ProjectDescription"
@@ -40,11 +42,29 @@
   </form>
 </template>
 
-
 <script>
+import { logger } from '../utils/Logger.js';
+import Pop from '../utils/Pop.js';
+import { projectsService } from '../services/ProjectsService.js'
+import { Modal } from 'bootstrap';
+import { ref } from '@vue/reactivity';
 export default {
   setup() {
-    return {}
+    const newProject = ref({})
+    return {
+      newProject,
+      async createProject() {
+        try {
+          await projectsService.createProject(newProject.value);
+          newProject.value = {}
+          Modal.getOrCreateInstance(document.getElementById("create-project")).toggle()
+        }
+        catch (error) {
+          logger.log(error)
+          Pop.toast(error.message, "error");
+        }
+      }
+    }
   }
 }
 </script>

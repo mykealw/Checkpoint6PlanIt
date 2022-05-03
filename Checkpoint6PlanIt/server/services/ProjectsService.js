@@ -1,5 +1,6 @@
 import { BadRequest } from "@bcwdev/auth0provider/lib/Errors";
 import { dbContext } from "../db/DbContext.js";
+import { AccountSchema } from "../models/Account.js";
 
 class ProjectsService {
   async deleteProject(projectId) {
@@ -19,8 +20,9 @@ class ProjectsService {
     }
     return project
   }
-  async getAllProjects() {
-    const projects = await dbContext.Projects.find({}).populate('creator')
+  async getAllProjects(accountId) {
+
+    const projects = await dbContext.Projects.find({ creatorId: accountId }).populate('creator')
     return projects
   }
 
