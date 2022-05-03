@@ -1,9 +1,9 @@
 <template>
-  <div class="container shadow mt-4 m-auto">
+  <div class="p-3 shadow mt-4 m-auto">
     <div class="row">
       <div class="col-md-10">
         <h4>Projects</h4>
-        <h5>here are all -YOUR- active projects</h5>
+        <h5>here are all {{ user.name }} active projects</h5>
       </div>
       <div class="col-md-2 m-auto">
         <button

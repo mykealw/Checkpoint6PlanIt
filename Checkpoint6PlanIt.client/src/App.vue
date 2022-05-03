@@ -2,7 +2,7 @@
   <header>
     <Navbar />
   </header>
-  <main class="vh-100">
+  <main class="vh-90 container-fluid">
     <router-view />
   </main>
 </template>
