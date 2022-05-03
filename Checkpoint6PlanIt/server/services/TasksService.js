@@ -15,6 +15,7 @@ class TasksService {
     original.weight = update.weight || original.weight
     original.projectId = update.projectId || original.projectId
     original.sprintId = update.sprintId || original.sprintId
+    original.isComplete = update.isComplete || original.isComplete
     await original.save()
     return original
   }
@@ -27,7 +28,8 @@ class TasksService {
     return tasks
   }
   async createTask(body) {
-    const task = await dbContext.Tasks.createTask(body)
+    const task = await dbContext.Tasks.create(body)
+    await task.populate('creator', 'name picture')
     return task
   }
 

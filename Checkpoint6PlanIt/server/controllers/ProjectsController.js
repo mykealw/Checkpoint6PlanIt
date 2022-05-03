@@ -16,6 +16,7 @@ export class ProjectsController extends BaseController {
             .get('/:projectId/sprints', this.getSprintsByProject)
             .get('/:projectId/tasks', this.getTasksByProject)
             .delete('/:id', this.deleteProject)
+            .get('/:projectId/notes', this.getNotesByProject)
 
     }
     async getTasksByProject(req, res, next) {
