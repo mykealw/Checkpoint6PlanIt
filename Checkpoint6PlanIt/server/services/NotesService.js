@@ -11,7 +11,7 @@ class NotesService {
     return noteToDelete
   }
   async getNotesByProject(projectId) {
-    return await dbContext.Notes.find({ projectId: projectId }).populate('creator', 'name')
+    return await dbContext.Notes.find({ projectId: projectId }).populate('creator')
   }
 
 
