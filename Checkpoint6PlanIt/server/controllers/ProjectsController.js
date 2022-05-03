@@ -10,13 +10,13 @@ export class ProjectsController extends BaseController {
         super('api/projects')
         this.router
             .use(Auth0Provider.getAuthorizedUserInfo)
-            .post('', this.createProject)
             .get('', this.getAllProjects)
             .get('/:id', this.getProjectById)
             .get('/:projectId/sprints', this.getSprintsByProject)
             .get('/:projectId/tasks', this.getTasksByProject)
-            .delete('/:id', this.deleteProject)
             .get('/:projectId/notes', this.getNotesByProject)
+            .post('', this.createProject)
+            .delete('/:id', this.deleteProject)
 
     }
     async getTasksByProject(req, res, next) {
