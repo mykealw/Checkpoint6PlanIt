@@ -31,7 +31,7 @@
       data-bs-parent="#accordionExample"
     >
       <div class="accordion-body">
-        <Tasks />
+        <Tasks v-for="t in tasks" :key="t.id" :task="t" />
       </div>
     </div>
   </div>
@@ -39,6 +39,7 @@
 
 
 <script>
+import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
 import { logger } from '../utils/Logger.js'
 export default {
@@ -50,10 +51,13 @@ export default {
   },
   setup(props) {
     return {
-      setSprint() {
-        AppState.activeSprint = props.sprint
+      // tasks,
+      async setSprint() {
+        AppState.activeSprint = await props.sprint
         logger.log(AppState.activeSprint)
-      }
+      },
+      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id))
+
     }
   }
 }

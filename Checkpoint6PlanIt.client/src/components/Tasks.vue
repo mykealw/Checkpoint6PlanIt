@@ -1,8 +1,14 @@
-<template>heeeeelllooo from tasks</template>
+<template>{{ task.name }}</template>
 
 
 <script>
 export default {
+  props: {
+    task: {
+      type: Object,
+      required: true
+    }
+  },
   setup() {
     return {}
   }

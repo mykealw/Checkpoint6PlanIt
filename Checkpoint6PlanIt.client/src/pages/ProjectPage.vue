@@ -75,6 +75,7 @@ import { AppState } from '../AppState.js'
 import { logger } from '../utils/Logger.js'
 import { sprintsService } from '../services/SprintsService.js'
 import { onMounted, watchEffect } from '@vue/runtime-core'
+import { tasksService } from '../services/TasksService.js'
 
 export default {
   setup() {
@@ -86,6 +87,7 @@ export default {
           AppState.sprints = []
           await projectsService.getProjectById(route.params.projectId)
           await sprintsService.getSprintsByProject(route.params.projectId)
+          await tasksService.getTasksByProject(route.params.projectId)
         }
       }
       catch (error) {
@@ -97,6 +99,8 @@ export default {
       try {
         await sprintsService.getSprintsByProject(route.params.projectId)
         await projectsService.getProjectById(route.params.projectId)
+        await tasksService.getTasksByProject(route.params.projectId)
+
 
       } catch (error) {
         logger.log(error)
@@ -120,7 +124,8 @@ export default {
       },
       //   projects: computed(() => AppState.projects),
       activeProject: computed(() => AppState.activeProject),
-      sprints: computed(() => AppState.sprints)
+      sprints: computed(() => AppState.sprints),
+      tasks: computed(() => AppState.tasks)
     }
   }
 }
