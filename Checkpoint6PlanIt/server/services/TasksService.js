@@ -29,7 +29,7 @@ class TasksService {
   }
   async createTask(body) {
     const task = await dbContext.Tasks.create(body)
-    await task.populate('creator')
+    await task.populate('creator sprint project')
     return task
   }
 

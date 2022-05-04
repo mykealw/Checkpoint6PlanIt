@@ -11,6 +11,7 @@
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
 import { useRouter } from 'vue-router'
+import { logger } from '../utils/Logger.js'
 export default {
   props: {
     project: {
@@ -24,6 +25,8 @@ export default {
       //   project: computed(() => AppState.projects)
       goToProject() {
         router.push({ name: 'Project', params: { projectId: props.project.id } })
+         AppState.activeProject = props.project
+        logger.log(AppState.activeProject, "active project")
       }
     }
   }

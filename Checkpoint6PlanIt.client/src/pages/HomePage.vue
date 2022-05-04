@@ -52,7 +52,7 @@ export default {
 
     onMounted(async () => {
       try {
-        await projectsService.getMyProjects()
+        // await projectsService.getMyProjects()
       } catch (error) {
         logger.log(error)
         Pop.toast(error.message, "error")

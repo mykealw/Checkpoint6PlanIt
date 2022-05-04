@@ -1,40 +1,36 @@
 <template>
-  <div class="component mt-3">
-    <div class="accordion" id="accordionExample">
-      <div class="accordion-item p-2">
-        <div
-          class="d-flex justify-content-between selectable"
-          aria-expanded="true"
-          aria-controls="collapseOne"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
+  <div class="accordion-item p-2">
+    <div
+      class="d-flex justify-content-between selectable"
+      aria-expanded="true"
+      aria-controls="collapseOne"
+      data-bs-toggle="collapse"
+      :data-bs-target="'#c-' + sprint.id"
+    >
+      <div class="accordion-header d-flex" id="headingOne">
+        <h3>{{ sprint.name }}</h3>
+        <h3 class="ms-5">0<i class="mdi mdi-weight"></i></h3>
+      </div>
+      <div class="d-flex">
+        <button
+          class="btn btn-success me-5"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#create-task"
         >
-          <div class="accordion-header d-flex" id="headingOne">
-            <h3>Sprint 1</h3>
-            <h3 class="ms-5">0<i class="mdi mdi-weight"></i></h3>
-          </div>
-          <div class="d-flex">
-            <button
-              class="btn btn-success me-5"
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target="#create-task"
-            >
-              Create Task
-            </button>
-            <h3>0/0 Tasks Complete</h3>
-          </div>
-        </div>
-        <div
-          id="collapseOne"
-          class="accordion-collapse collapse show"
-          aria-labelledby="headingOne"
-          data-bs-parent="#accordionExample"
-        >
-          <div class="accordion-body">
-            <Tasks />
-          </div>
-        </div>
+          Create Task
+        </button>
+        <h3>0/0 Tasks Complete</h3>
+      </div>
+    </div>
+    <div
+      :id="'c-' + sprint.id"
+      class="accordion-collapse collapse show"
+      aria-labelledby="headingOne"
+      data-bs-parent="#accordionExample"
+    >
+      <div class="accordion-body">
+        <Tasks />
       </div>
     </div>
   </div>
@@ -43,6 +39,12 @@
 
 <script>
 export default {
+  props: {
+    sprint: {
+      type: Object,
+      required: true,
+    }
+  },
   setup() {
     return {}
   }

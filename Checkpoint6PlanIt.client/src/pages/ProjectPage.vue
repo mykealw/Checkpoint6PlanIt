@@ -14,7 +14,7 @@
     <div class="col-md-10">
       <div class="row">
         <div class="d-flex">
-          <h2>PROJECT NAME</h2>
+          <h2>{{ activeProject.name }}</h2>
           <h2>
             <i
               class="mdi mdi-delete ms-4 selectable"
@@ -22,7 +22,7 @@
             ></i>
           </h2>
         </div>
-        <h5>PROJECT DESCRIPTION</h5>
+        <h5>{{ activeProject.description }}</h5>
       </div>
       <div class="row">
         <div class="col-md-10">
@@ -39,7 +39,11 @@
         </div>
       </div>
       <div class="row">
-        <Sprints />
+        <div class="component mt-3">
+          <div class="accordion" id="accordionExample">
+            <Sprints v-for="s in sprints" :key="s.id" :sprint="s" />
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-1"></div>
@@ -69,14 +73,42 @@ import { projectsService } from '../services/ProjectsService.js'
 import Pop from '../utils/Pop.js'
 import { AppState } from '../AppState.js'
 import { logger } from '../utils/Logger.js'
+import { sprintsService } from '../services/SprintsService.js'
+import { onMounted, watchEffect } from '@vue/runtime-core'
+
 export default {
   setup() {
     const route = useRoute()
+    watchEffect(async () => {
+      try {
+        if (route.params.id) {
+          AppState.activeProject = []
+          AppState.sprints = []
+          await projectsService.getProjectById(route.params.projectId)
+          await sprintsService.getSprintsByProject(route.params.projectId)
+        }
+      }
+      catch (error) {
+        logger.error("[error prefix]", error.message);
+        Pop.toast(error.message, "error");
+      }
+    })
+    onMounted(async () => {
+      try {
+        await sprintsService.getSprintsByProject(route.params.projectId)
+        await projectsService.getProjectById(route.params.projectId)
+
+      } catch (error) {
+        logger.log(error)
+        Pop.toast(error.message, "error")
+      }
+    })
     return {
+      route,
       async deleteProject() {
         try {
           if (await Pop.confirm()) {
-            logger.log(route.params, "dfkdf")
+            // logger.log(route.params, "dfkdf")
             await projectsService.deleteProject(route.params.projectId)
             Pop.toast('project deleted', 'success')
           }
@@ -86,7 +118,9 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
-      projects: computed(() => AppState.projects)
+      //   projects: computed(() => AppState.projects),
+      activeProject: computed(() => AppState.activeProject),
+      sprints: computed(() => AppState.sprints)
     }
   }
 }

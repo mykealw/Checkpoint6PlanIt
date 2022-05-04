@@ -21,6 +21,11 @@ class ProjectsService {
         // AppState.projects = AppState.projects.filter(p => projectid !== projectId)
         router.push({ name: 'Home' })
     }
+    async getProjectById(projectId) {
+        const res = await api.get('api/projects/' + projectId)
+        AppState.activeProject = res.data
+        // logger.log(res.data, "test$$")
+    }
 }
 
 export const projectsService = new ProjectsService()

@@ -52,7 +52,7 @@ export default {
       route,
       async createTask() {
         try {
-          await tasksService.createTask(newTask.value, route.params.id)
+          await tasksService.createTask(newTask.value, route.params.projectId)
           newTask.value = {}
           Modal.getOrCreateInstance(document.getElementById("create-task")).toggle()
         } catch (error) {

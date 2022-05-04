@@ -8,6 +8,12 @@ class SprintsService {
     AppState.sprints = res.data
     logger.log(AppState.sprints, 'createSprint')
   }
+  async getSprintsByProject(projectId) {
+    const res = await api.get('api/projects/' + projectId + '/sprints')
+
+    logger.log(AppState.sprints, 'createSprint')
+    AppState.sprints = res.data
+  }
 }
 
 export const sprintsService = new SprintsService()
