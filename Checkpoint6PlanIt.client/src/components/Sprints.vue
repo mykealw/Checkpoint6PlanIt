@@ -9,7 +9,7 @@
     >
       <div class="accordion-header d-flex" id="headingOne">
         <h3>{{ sprint.name }}</h3>
-        <h3 class="ms-5">0<i class="mdi mdi-weight"></i></h3>
+        <h3 class="ms-5">{{ weight }}<i class="mdi mdi-weight"></i></h3>
       </div>
       <div class="d-flex">
         <button
@@ -42,6 +42,8 @@
 import { computed } from '@vue/reactivity'
 import { AppState } from '../AppState.js'
 import { logger } from '../utils/Logger.js'
+import { onMounted } from '@vue/runtime-core'
+import Pop from '../utils/Pop.js'
 export default {
   props: {
     sprint: {
@@ -50,14 +52,30 @@ export default {
     }
   },
   setup(props) {
+    let weight = 0
+    onMounted(async () => {
+      try {
+        await totalWeight()
+      }
+      catch (error) {
+        logger.log("[error prefix]", error.message);
+        Pop.toast(error.message, "error");
+      }
+    })
     return {
+      weight,
+      totalWeight() {
+        tasks.forEach(t => {
+          weight += t.weight
+        })
+      },
       // tasks,
       async setSprint() {
         AppState.activeSprint = await props.sprint
-        logger.log(AppState.activeSprint)
+        // logger.log(AppState.activeSprint)
       },
-      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id))
 
+      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id))
     }
   }
 }
