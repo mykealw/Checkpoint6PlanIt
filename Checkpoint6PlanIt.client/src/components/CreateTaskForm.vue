@@ -43,6 +43,7 @@ import { tasksService } from '../services/TasksService.js'
 import { useRoute } from 'vue-router'
 import { Modal } from 'bootstrap'
 import { ref } from '@vue/reactivity'
+import { AppState } from '../AppState.js'
 export default {
   setup() {
     const newTask = ref({})
@@ -52,8 +53,10 @@ export default {
       route,
       async createTask() {
         try {
+          newTask.value.sprintId = AppState.activeSprint.id
           await tasksService.createTask(newTask.value, route.params.projectId)
           newTask.value = {}
+          AppState.activeSprint = []
           Modal.getOrCreateInstance(document.getElementById("create-task")).toggle()
         } catch (error) {
           logger.error(error)

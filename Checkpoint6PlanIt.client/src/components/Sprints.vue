@@ -17,6 +17,7 @@
           type="button"
           data-bs-toggle="modal"
           data-bs-target="#create-task"
+          @click="setSprint()"
         >
           Create Task
         </button>
@@ -38,6 +39,8 @@
 
 
 <script>
+import { AppState } from '../AppState.js'
+import { logger } from '../utils/Logger.js'
 export default {
   props: {
     sprint: {
@@ -45,8 +48,13 @@ export default {
       required: true,
     }
   },
-  setup() {
-    return {}
+  setup(props) {
+    return {
+      setSprint() {
+        AppState.activeSprint = props.sprint
+        logger.log(AppState.activeSprint)
+      }
+    }
   }
 }
 </script>

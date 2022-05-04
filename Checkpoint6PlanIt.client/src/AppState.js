@@ -4,6 +4,7 @@ import { reactive } from 'vue'
 export const AppState = reactive({
   tasks: [],
   sprints: [],
+  activeSprint: [],
   projects: [],
   user: {},
   account: {},
