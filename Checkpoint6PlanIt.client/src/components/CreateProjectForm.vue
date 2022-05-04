@@ -10,7 +10,7 @@
           name="ProjectName"
           id="ProjectName"
           aria-describedby="project to create name"
-          placeholder="name..."
+          placeholder="Name..."
         />
       </div>
     </div>
@@ -26,15 +26,12 @@
           name="ProjectDescription"
           id="ProjectDescription"
           rows="5"
+          placeholder="Description..."
         ></textarea>
       </div>
     </div>
     <div class="d-flex justify-content-end">
-      <button
-        type="button"
-        data-bs-toggle="dismiss"
-        class="btn btn-danger me-2"
-      >
+      <button type="button" data-bs-dismiss="modal" class="btn btn-danger me-2">
         Cancel
       </button>
       <button type="submit" class="btn btn-success">Submit</button>

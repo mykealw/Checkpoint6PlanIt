@@ -1,5 +1,5 @@
 <template>
- <div
+  <div
     class="modal fade"
     tabindex="-1"
     role="dialog"
@@ -22,9 +22,6 @@
         <div class="modal-body">
           <slot name="body"><!--body here --></slot>
         </div>
-        <div class="modal-footer">
-          <slot name="footer"><!--footer here --></slot>
-        </div>
       </div>
     </div>
   </div>
@@ -33,13 +30,12 @@
 
 <script>
 export default {
-    setup(){
-        return {}
-    }
+  setup() {
+    return {}
+  }
 }
 </script>
 
 
 <style lang="scss" scoped>
-
 </style>

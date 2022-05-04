@@ -1,11 +1,26 @@
 <template>
   <div class="row">
-    <div class="col-md-1">TABS</div>
+    <div class="col-md-1 gx-0">
+      <button
+        class="btn btn-primary"
+        type="button"
+        data-bs-toggle="offcanvas"
+        data-bs-target="#projects-list"
+        aria-controls="offcanvasRight"
+      >
+        Projects
+      </button>
+    </div>
     <div class="col-md-10">
       <div class="row">
         <div class="d-flex">
           <h2>PROJECT NAME</h2>
-          <h2><i class="mdi mdi-delete" @click="deleteProject"></i></h2>
+          <h2>
+            <i
+              class="mdi mdi-delete ms-4 selectable"
+              @click="deleteProject"
+            ></i>
+          </h2>
         </div>
         <h5>PROJECT DESCRIPTION</h5>
       </div>
@@ -13,8 +28,14 @@
         <div class="col-md-10">
           <h4>Sprints</h4>
         </div>
-        <div class="col-md-2">
-          <button class="btn btn-success">Add Sprint</button>
+        <div class="col-md-2 text-end">
+          <button
+            data-bs-toggle="modal"
+            data-bs-target="#create-sprint"
+            class="btn btn-success m-auto"
+          >
+            Create Sprint
+          </button>
         </div>
       </div>
       <div class="row">
@@ -23,7 +44,21 @@
     </div>
     <div class="col-md-1"></div>
   </div>
-  <!-- <OffCanvas /> -->
+
+  <Modal id="create-sprint">
+    <template #title><h4>Create Sprint</h4></template>
+    <template #body><CreateSprintForm /></template>
+  </Modal>
+
+  <Modal id="create-task">
+    <template #title>Create Task</template>
+    <template #body><CreateTaskForm /></template>
+  </Modal>
+
+  <Offcanvas id="projects-list">
+    <template #title>Projects</template>
+    <template #body>....</template>
+  </Offcanvas>
 </template>
 
 
