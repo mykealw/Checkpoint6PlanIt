@@ -56,10 +56,14 @@ export default {
   },
   setup(props) {
     const route = useRoute()
-    let weight = 0
+    // let weight = 0
     onMounted(async () => {
       try {
-        await totalWeight()
+        // await totalWeight(){
+        //   tasks.forEach(t => {
+        //     weight += t.weight
+        //   })
+        // }
       }
       catch (error) {
         logger.log("[error prefix]", error.message);
@@ -67,12 +71,8 @@ export default {
       }
     })
     return {
-      weight,
-      totalWeight() {
-        tasks.forEach(t => {
-          weight += t.weight
-        })
-      },
+      weight: computed(() => AppState.weight),
+      // totalWeight() ,
       // tasks,
       async setSprint() {
         AppState.activeSprint = await props.sprint
