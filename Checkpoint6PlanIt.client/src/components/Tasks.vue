@@ -6,8 +6,9 @@
           class="selectable"
           data-bs-toggle="modal"
           :data-bs-target="'#m-' + task.id"
+          @click="setActiveTask(task)"
         >
-          {{ task.name }}
+          {{ task.name }} <i v-if="task.isComplete" class="mdi mdi-star"></i>
         </h3>
       </div>
       <div class="d-flex">
@@ -30,11 +31,33 @@
     <template #body>
       <TaskForm :task="task" />
     </template>
+    <template #footer>
+      <form @submit.prevent="createNote()">
+        <div class="mb-3">
+          <label for="createNote" class="form-label visually-hidden"
+            >Create Note</label
+          >
+          <textarea
+            class="form-control"
+            name="createNote"
+            id="createNote"
+            rows="3"
+            placeholder="Create note..."
+            required
+            v-model="newNote.body"
+          ></textarea>
+        </div>
+        <div>
+          <button class="btn btn-success" type="submit">Post It!</button>
+        </div>
+      </form>
+      <Note v-for="n in notes" :key="n.id" :note="n" />
+    </template>
   </Modal>
 </template>
 
 <script>
-import { computed } from '@vue/reactivity';
+import { computed, ref } from '@vue/reactivity';
 import { useRoute } from 'vue-router';
 import { tasksService } from '../services/TasksService.js';
 import { logger } from '../utils/Logger.js';
@@ -50,7 +73,9 @@ export default {
   },
   setup(props) {
     const route = useRoute()
+    const newNote = ref({})
     return {
+      newNote,
       async deleteTask() {
         try {
           if (await Pop.confirm()) {
@@ -62,9 +87,22 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
-
-      sprints: computed(() => AppState.sprints)
-
+      setActiveTask(task) {
+        AppState.activeTask = task
+      },
+      async createNote() {
+        try {
+          newNote.value.taskId = AppState.activeTask.id
+          // logger.log(newNote, 'newNote')
+          await tasksService.createNote(newNote.value, route.params.projectId)
+        }
+        catch (error) {
+          logger.log("[error prefix]", error.message);
+          Pop.toast(error.message, "error");
+        }
+      },
+      sprints: computed(() => AppState.sprints),
+      notes: computed(() => AppState.notes.filter(n => n.taskId == props.task.id))
     }
   }
 

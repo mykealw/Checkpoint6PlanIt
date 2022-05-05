@@ -2,7 +2,9 @@
   <div class="col-md-5 selectable" @click.stop="goToProject()">
     <h3>{{ project.name }}</h3>
   </div>
-  <div class="col-md-5">{{ project.creator.name }}</div>
+  <div class="col-md-5">
+    <img :src="project.creator.picture" alt="" />
+  </div>
   <div class="col-md-2">{{ new Date(project.createdAt).toLocaleString() }}</div>
 </template>
 
@@ -26,7 +28,7 @@ export default {
       goToProject() {
         router.push({ name: 'Project', params: { projectId: props.project.id } })
         AppState.activeProject = props.project
-        logger.log(AppState.activeProject, "active project")
+        // logger.log(AppState.activeProject, "active project")
       }
     }
   }

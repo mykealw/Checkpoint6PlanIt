@@ -51,6 +51,36 @@
         </ul>
       </div>
     </div>
+    <!-- <div class="d-flex justify-content-center">
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          name=""
+          id=""
+          value="checkedValue"
+          :checked="task.isComplete"
+          @click="edit.isComplete = !edit.isComplete"
+        />
+        <label class="form-check-label" for=""> Display value </label>
+      </div>
+
+      <button
+        class="btn btn-info me-3"
+        type="button"
+        :disabled="!task.isComplete"
+      >
+        Needs Work
+      </button>
+      <button
+        class="btn btn-info ms-3"
+        type="button"
+        :disabled="task.isComplete"
+        @click="completeTask(true)"
+      >
+        Finished!
+      </button>
+    </div> -->
     <div class="d-flex justify-content-center">
       <button
         class="btn btn-info me-3"
@@ -114,6 +144,9 @@ export default {
           if (!edit.value.name) {
             edit.value.name = props.task.name
           }
+          // if (!edit.value.isComplete) {
+          //   edit.value.isComplete = props.task.isComplete
+          // }
           if (!edit.value.weight) {
             edit.value.weight = props.task.weight
           }

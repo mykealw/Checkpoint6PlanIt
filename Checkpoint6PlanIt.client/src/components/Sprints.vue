@@ -24,7 +24,7 @@
         <div class="d-flex"></div>
         <div class="d-flex">
           <h3 class="ms-5">
-            {{ weightTotal }}<i class="mdi mdi-weight me-5"></i>
+            <!-- {{ weightTotal }}<i class="mdi mdi-weight me-5"></i> -->
           </h3>
           <h3><i @click="deleteSprint()" class="mdi mdi-delete mx-3"></i></h3>
           <button
@@ -105,7 +105,7 @@ export default {
         }
       },
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
-      weightTotal = computed(() => AppState.weight)
+      // weightTotal = computed(() => AppState.weight)
       // weightTotal: computed(() => AppState.tasks.forEach(t => {
       //   let total = 0
       //   total += t.weight

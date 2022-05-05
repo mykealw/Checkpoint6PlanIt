@@ -88,14 +88,17 @@ export default {
           if (!edit.value.name) {
             edit.value.name = AppState.account.name
           }
-          if (!edit.value.email) {
-            edit.value.email = AppState.account.email
+          if (!edit.value.picture) {
+            edit.value.picture = AppState.account.picture
           }
-          edit.value.email_verified = AppState.account.email_verified
-          edit.value.isAuthenticated = AppState.account.isAuthenticated
-          edit.value.nickname = AppState.account.nickname
-          edit.value.sub = AppState.account.sub
-          edit.value.updated_at = AppState.account.updated_at
+          // if (!edit.value.email) {
+          //   edit.value.email = AppState.account.email
+          // }
+          // edit.value.email_verified = AppState.account.email_verified
+          // edit.value.isAuthenticated = AppState.account.isAuthenticated
+          // edit.value.nickname = AppState.account.nickname
+          // edit.value.sub = AppState.account.sub
+          // edit.value.updated_at = AppState.account.updated_at
           await accountService.editAccount(edit.value)
           Pop.toast("Account updated", "success")
         } catch (error) {

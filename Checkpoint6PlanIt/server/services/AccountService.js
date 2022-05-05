@@ -66,6 +66,9 @@ class AccountService {
    *  @param {any} body Updates to apply to user object
    */
   async updateAccount(user, body) {
+    // const original = await this.getAccount(user)
+    // original.name = body.name || original.name
+    // original.picture = body.picture || original.picture
     const update = sanitizeBody(body)
     const account = await dbContext.Account.findOneAndUpdate(
       { _id: user.id },

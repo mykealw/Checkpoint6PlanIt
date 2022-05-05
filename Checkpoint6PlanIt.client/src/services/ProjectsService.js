@@ -15,11 +15,12 @@ class ProjectsService {
     async getMyProjects() {
         const res = await api.get('api/projects')
         AppState.projects = res.data
-        logger.log(res.data, "this is the projects")
+        // logger.log(res.data, "this is the projects")
     }
     async deleteProject(projectid) {
         const res = await api.delete('api/projects/' + projectid)
         // AppState.projects = AppState.projects.filter(p => projectid !== projectId)
+        AppState.projects = AppState.projects.filter(p => p.id != projectid)
         router.push({ name: 'Home' })
     }
     async getProjectById(projectId) {

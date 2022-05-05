@@ -91,7 +91,6 @@ import { sprintsService } from '../services/SprintsService.js'
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { tasksService } from '../services/TasksService.js'
 import { Offcanvas } from 'bootstrap'
-
 export default {
   setup() {
     const route = useRoute()
@@ -102,7 +101,7 @@ export default {
           await projectsService.getProjectById(route.params.projectId)
           await sprintsService.getSprintsByProject(route.params.projectId)
           await tasksService.getTasksByProject(route.params.projectId)
-
+          await tasksService.getNotesByProject(route.params.projectId)
         }
       }
       catch (error) {
@@ -115,6 +114,7 @@ export default {
         await sprintsService.getSprintsByProject(route.params.projectId)
         await projectsService.getProjectById(route.params.projectId)
         await tasksService.getTasksByProject(route.params.projectId)
+        await tasksService.getNotesByProject(route.params.projectId)
       } catch (error) {
         logger.log(error)
         Pop.toast(error.message, "error")
@@ -144,7 +144,8 @@ export default {
       activeProject: computed(() => AppState.activeProject),
       sprints: computed(() => AppState.sprints),
       tasks: computed(() => AppState.tasks),
-      projects: computed(() => AppState.projects)
+      projects: computed(() => AppState.projects),
+      notes: computed(() => AppState.notes)
     }
   }
 }
