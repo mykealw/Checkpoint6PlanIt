@@ -10,6 +10,7 @@
         aria-describedby="helpId"
         placeholder="Name.."
         v-model="newTask.name"
+        required
       />
     </div>
     <div class="mb-3">
@@ -24,6 +25,7 @@
         aria-describedby="helpId"
         placeholder="0"
         v-model="newTask.weight"
+        required
       />
     </div>
     <div class="d-flex justify-content-end">

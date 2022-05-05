@@ -27,6 +27,7 @@
   <Modal :id="'m-' + task.id">
     <template #title>
       <h4>{{ task.name }} Details</h4>
+     
     </template>
     <template #body>
       <TaskForm :task="task" />

@@ -1,5 +1,12 @@
 <template>
-  <form @submit.prevent="editTask()">
+  <h6
+    class="selectable p-3 border border-dark m-2 bg-light rounded"
+    @click="editing = !editing"
+  >
+    Edit Task
+    <i class="text-dark selectable ms-2 mdi mdi-pencil"></i>
+  </h6>
+  <form v-if="editing == true" @submit.prevent="editTask()">
     <div class="mb-3">
       <label for="taskName" class="form-label visually-hidden">Name</label>
       <input
@@ -125,8 +132,10 @@ export default {
   },
   setup(props) {
     const edit = ref({})
+    const editing = ref(false);
     return {
       edit,
+      editing,
       sprints: computed(() => AppState.sprints),
       addSprintId(sId) {
         edit.value.sprintId = sId

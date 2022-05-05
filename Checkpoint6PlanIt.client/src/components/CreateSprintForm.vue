@@ -11,6 +11,7 @@
         id="sprintName"
         aria-describedby="helpId"
         placeholder="Name..."
+        required
         v-model="newSprint.name"
       />
     </div>

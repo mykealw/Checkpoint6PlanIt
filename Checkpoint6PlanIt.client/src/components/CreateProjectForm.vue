@@ -4,6 +4,7 @@
       <div class="mb-3">
         <label for="ProjectName" class="visually-hidden form-label"></label>
         <input
+          required
           v-model="newProject.name"
           type="text"
           class="form-control"
@@ -21,6 +22,7 @@
           class="form-label visually-hidden"
         ></label>
         <textarea
+          required
           v-model="newProject.description"
           class="form-control"
           name="ProjectDescription"

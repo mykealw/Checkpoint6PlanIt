@@ -35,7 +35,12 @@ class TasksService {
     // logger.log(AppState.tasks, "before")
     const res = await api.put('api/projects/' + edit.projectId + '/tasks/' + edit.taskId, edit)
     // logger.log(res.data, "our edit ")
-    AppState.tasks.splice(AppState.tasks.indexOf(edit.taskId), 1, edit)
+    const index = AppState.tasks.findIndex(t => t.id === res.data.id)
+    if (index != -1) {
+      AppState.tasks.splice(index, 1, res.data)
+    }
+    debugger
+    logger.log(AppState.tasks.indexOf(edit.taskId), 'hot dawg')
     // logger.log(AppState.tasks, "after")
   }
   async deleteNote(noteId, projectId) {
