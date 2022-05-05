@@ -1,33 +1,48 @@
 <template>
-  <div class="accordion-item p-2">
+  <div class="accordion-item">
     <div
-      class="d-flex justify-content-between selectable"
+      class="
+        d-flex
+        justify-content-between
+        selectable
+        bg-secondary
+        border-dark border-top border-start border-end
+      "
       aria-expanded="true"
       aria-controls="collapseOne"
       data-bs-toggle="collapse"
       :data-bs-target="'#c-' + sprint.id"
     >
-      <div class="accordion-header d-flex" id="headingOne">
-        <h3>{{ sprint.name }}</h3>
-        <h3 class="ms-5">{{ weight }}<i class="mdi mdi-weight"></i></h3>
-        <h3><i @click="deleteSprint()" class="mdi mdi-delete"></i></h3>
-      </div>
-      <div class="d-flex">
-        <button
-          class="btn btn-success me-5"
-          type="button"
-          data-bs-toggle="modal"
-          data-bs-target="#create-task"
-          @click="setSprint()"
-        >
-          Create Task
-        </button>
-        <h3>0/0 Tasks Complete</h3>
+      <div
+        class="accordion-header d-flex justify-content-between w-100"
+        id="headingOne"
+      >
+        <div class="">
+          <h3>{{ sprint.name }}</h3>
+        </div>
+        <div class="d-flex"></div>
+        <div class="d-flex"></div>
+        <div class="d-flex">
+          <h3 class="ms-5">
+            {{ weightTotal }}<i class="mdi mdi-weight me-5"></i>
+          </h3>
+          <h3><i @click="deleteSprint()" class="mdi mdi-delete mx-3"></i></h3>
+          <button
+            class="btn btn-success me-3"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#create-task"
+            @click="setSprint()"
+          >
+            Create Task
+          </button>
+          <h3>0/0 Completed</h3>
+        </div>
       </div>
     </div>
     <div
       :id="'c-' + sprint.id"
-      class="accordion-collapse collapse show"
+      class="accordion-collapse collapse border-dark border"
       aria-labelledby="headingOne"
       data-bs-parent="#accordionExample"
     >
@@ -57,21 +72,21 @@ export default {
   setup(props) {
     const route = useRoute()
     // let weight = 0
-    onMounted(async () => {
-      try {
-        // await totalWeight(){
-        //   tasks.forEach(t => {
-        //     weight += t.weight
-        //   })
-        // }
-      }
-      catch (error) {
-        logger.log("[error prefix]", error.message);
-        Pop.toast(error.message, "error");
-      }
-    })
+    // onMounted(async () => {
+    //   try {
+    //     await totalWeight(){
+    //       tasks.forEach(t => {
+    //         weight += t.weight
+    //       })
+    //     }
+    //   }
+    //   catch (error) {
+    //     logger.log("[error prefix]", error.message);
+    //     Pop.toast(error.message, "error");
+    //   }
+    // })
     return {
-      weight: computed(() => AppState.weight),
+      // weight: computed(() => AppState.weight),
       // totalWeight() ,
       // tasks,
       async setSprint() {
@@ -89,7 +104,13 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
-      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id))
+      tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
+      weightTotal = computed(() => AppState.weight)
+      // weightTotal: computed(() => AppState.tasks.forEach(t => {
+      //   let total = 0
+      //   total += t.weight
+      //   return total
+      // }))
     }
   }
 }

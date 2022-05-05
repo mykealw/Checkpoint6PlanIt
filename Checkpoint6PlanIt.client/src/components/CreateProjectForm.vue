@@ -45,14 +45,17 @@ import Pop from '../utils/Pop.js';
 import { projectsService } from '../services/ProjectsService.js'
 import { Modal } from 'bootstrap';
 import { ref } from '@vue/reactivity';
+import { useRouter } from 'vue-router';
 export default {
   setup() {
     const newProject = ref({})
+    const router = useRouter()
     return {
       newProject,
       async createProject() {
         try {
-          await projectsService.createProject(newProject.value);
+          const project = await projectsService.createProject(newProject.value);
+          router.push({ name: 'Project', params: { projectId: project.id } })
           newProject.value = {}
           Modal.getOrCreateInstance(document.getElementById("create-project")).toggle()
         }

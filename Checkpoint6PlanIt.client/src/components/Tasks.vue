@@ -1,15 +1,26 @@
 <template>
   <div class="row">
-    <div class="col-md-12">
-      <h3
-        class="selectable"
-        data-bs-toggle="modal"
-        :data-bs-target="'#m-' + task.id"
-      >
-        {{ task.name }}
-        <i class="mdi mdi-delete" @click.stop="deleteTask()"></i>
-      </h3>
-      <h3>{{ task.weight }} <i class="mdi mdi-weight"></i></h3>
+    <div class="col-md-12 d-flex w-100">
+      <div class="third">
+        <h3
+          class="selectable"
+          data-bs-toggle="modal"
+          :data-bs-target="'#m-' + task.id"
+        >
+          {{ task.name }}
+        </h3>
+      </div>
+      <div class="d-flex">
+        <h3>
+          {{ task.weight }}
+        </h3>
+        <h3 class="ms-1">
+          <i class="mdi mdi-weight"></i>
+        </h3>
+        <h3 class="ms-3">
+          <i class="mdi mdi-delete" @click.stop="deleteTask()"></i>
+        </h3>
+      </div>
     </div>
   </div>
   <Modal :id="'m-' + task.id">
@@ -62,4 +73,7 @@ export default {
 
 
 <style lang="scss" scoped>
+.third {
+  width: 40%;
+}
 </style>

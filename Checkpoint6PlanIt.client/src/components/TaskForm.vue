@@ -12,7 +12,7 @@
         placeholder="Name..."
       />
     </div>
-    <div class="d-flex">
+    <div class="d-flex justify-content-between">
       <div class="mb-3">
         <label for="taskWeight" class="form-label visually-hidden"
           >Weight</label
@@ -27,31 +27,49 @@
           placeholder="Weight..."
         />
       </div>
+      <div class="dropdown">
+        <button
+          class="btn btn-secondary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Change Sprint
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li>
+            <a
+              class="dropdown-item"
+              v-for="s in sprints"
+              :key="s.id"
+              :sprint="s"
+              @click="addSprintId(s.id)"
+              >{{ s.name }}</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="dropdown">
+    <div class="d-flex justify-content-center">
       <button
-        class="btn btn-secondary dropdown-toggle"
+        class="btn btn-info me-3"
         type="button"
-        id="dropdownMenuButton1"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
+        :disabled="!task.isComplete"
+        @click="completeTask(false)"
       >
-        Change Sprint
+        Needs Work
       </button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li>
-          <a
-            class="dropdown-item"
-            v-for="s in sprints"
-            :key="s.id"
-            :sprint="s"
-            @click="addSprintId(s.id)"
-            >{{ s.name }}</a
-          >
-        </li>
-      </ul>
+      <button
+        class="btn btn-info ms-3"
+        type="button"
+        :disabled="task.isComplete"
+        @click="completeTask(true)"
+      >
+        Finished!
+      </button>
     </div>
-    <div class="d-flex justify-content-end">
+    <div class="d-flex justify-content-end mt-4">
       <button type="button" data-bs-dismiss="modal" class="btn btn-danger me-2">
         Cancel
       </button>
@@ -84,6 +102,11 @@ export default {
         edit.value.sprintId = sId
         return edit
       },
+      completeTask(value) {
+        edit.value.isComplete = value
+        props.task.isComplete = value
+        return edit
+      },
       async editTask() {
         try {
           edit.value.taskId = props.task.id
@@ -95,7 +118,7 @@ export default {
             edit.value.weight = props.task.weight
           }
           await tasksService.editTask(edit.value)
-          //   Modal.getOrCreateInstance(document.getElementById())
+          Modal.getOrCreateInstance(document.getElementById('m-' + props.task.id)).hide()
         }
         catch (error) {
           logger.log("[error prefix]", error.message);

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-1 gx-0">
       <button
-        class="btn btn-primary"
+        class="btn btn-primary mt-2 rnd"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#projects-list"
@@ -61,7 +61,21 @@
 
   <Offcanvas id="projects-list">
     <template #title>Projects</template>
-    <template #body>....</template>
+    <template #body>
+      <div
+        class="d-flex justify-content-between selectable"
+        v-for="p in projects"
+        :key="p.id"
+        @click="goToProject(p, p.id)"
+      >
+        <div>
+          <h4>{{ p.name }}</h4>
+        </div>
+        <div>
+          <h6>{{ new Date(p.createdAt).toLocaleString() }}</h6>
+        </div>
+      </div>
+    </template>
   </Offcanvas>
 </template>
 
@@ -76,18 +90,19 @@ import { logger } from '../utils/Logger.js'
 import { sprintsService } from '../services/SprintsService.js'
 import { onMounted, watchEffect } from '@vue/runtime-core'
 import { tasksService } from '../services/TasksService.js'
+import { Offcanvas } from 'bootstrap'
 
 export default {
   setup() {
     const route = useRoute()
+    const router = useRouter()
     watchEffect(async () => {
       try {
-        if (route.params.id) {
-          AppState.activeProject = []
-          AppState.sprints = []
+        if (route.params.projectId) {
           await projectsService.getProjectById(route.params.projectId)
           await sprintsService.getSprintsByProject(route.params.projectId)
           await tasksService.getTasksByProject(route.params.projectId)
+
         }
       }
       catch (error) {
@@ -100,8 +115,6 @@ export default {
         await sprintsService.getSprintsByProject(route.params.projectId)
         await projectsService.getProjectById(route.params.projectId)
         await tasksService.getTasksByProject(route.params.projectId)
-
-
       } catch (error) {
         logger.log(error)
         Pop.toast(error.message, "error")
@@ -122,10 +135,16 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
-      //   projects: computed(() => AppState.projects),
+      goToProject(project, projectId) {
+        router.push({ name: 'Project', params: { projectId: projectId } })
+        Offcanvas.getOrCreateInstance(document.getElementById('projects-list')).hide()
+        AppState.sprints = []
+        AppState.activeProject = project
+      },
       activeProject: computed(() => AppState.activeProject),
       sprints: computed(() => AppState.sprints),
-      tasks: computed(() => AppState.tasks)
+      tasks: computed(() => AppState.tasks),
+      projects: computed(() => AppState.projects)
     }
   }
 }
@@ -133,4 +152,12 @@ export default {
 
 
 <style lang="scss" scoped>
+.rnd {
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  border-top-left-radius: 0em;
+  border-bottom-left-radius: 0em;
+  height: 10vh;
+  width: 75%;
+}
 </style>

@@ -12,9 +12,9 @@ class SprintsService {
   }
   async getSprintsByProject(projectId) {
     const res = await api.get('api/projects/' + projectId + '/sprints')
+    AppState.sprints = res.data
 
     // logger.log(AppState.sprints, 'createSprint')
-    AppState.sprints = res.data
   }
   async deleteSprint(sprintId, projectId) {
     // logger.log(sprintId, projectId, "sprint id project id")
