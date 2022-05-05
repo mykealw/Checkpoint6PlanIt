@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-10">
         <h4>Projects</h4>
-        <h5>here are all {{ user.name }} active projects</h5>
+        <h5>here are all {{ account.name }} active projects</h5>
       </div>
       <div class="col-md-2 m-auto">
         <button
