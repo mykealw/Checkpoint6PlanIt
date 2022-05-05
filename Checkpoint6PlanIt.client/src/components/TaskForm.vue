@@ -159,8 +159,8 @@ export default {
           if (!edit.value.weight) {
             edit.value.weight = props.task.weight
           }
+          Modal.getOrCreateInstance(document.getElementById('m-' + edit.value.taskId)).hide()
           await tasksService.editTask(edit.value)
-          Modal.getOrCreateInstance(document.getElementById('m-' + props.task.id)).hide()
         }
         catch (error) {
           logger.log("[error prefix]", error.message);

@@ -19,7 +19,7 @@
           <i class="mdi mdi-weight"></i>
         </h3>
         <h3 class="ms-3">
-          <i class="mdi mdi-delete" @click.stop="deleteTask()"></i>
+          <i class="mdi mdi-delete selectable" @click.stop="deleteTask()"></i>
         </h3>
       </div>
     </div>
@@ -27,7 +27,6 @@
   <Modal :id="'m-' + task.id">
     <template #title>
       <h4>{{ task.name }} Details</h4>
-     
     </template>
     <template #body>
       <TaskForm :task="task" />
