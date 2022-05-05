@@ -57,11 +57,6 @@
     <button class="btn btn-danger" @click="editing = false">Cancel</button>
     <button class="btn btn-success ms-2">Submit</button>
   </form>
-  <!-- <div class="about text-center">
-    <h1>Welcome {{ account.name }}</h1>
-    <img class="rounded" :src="account.picture" alt="" />
-    <p>{{ account.email }}</p>
-  </div> -->
 </template>
 
 <script>
@@ -84,7 +79,7 @@ export default {
       // edit.value: computed(() => AppState.activeAccount),
       async editAccount() {
         try {
-          edit.value.id = AppState.account.id
+          // edit.value.id = AppState.account.id
           if (!edit.value.name) {
             edit.value.name = AppState.account.name
           }
