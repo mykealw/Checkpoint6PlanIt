@@ -145,7 +145,9 @@ export default {
       sprints: computed(() => AppState.sprints),
       tasks: computed(() => AppState.tasks),
       projects: computed(() => AppState.projects),
-      notes: computed(() => AppState.notes)
+      notes: computed(() => AppState.notes),
+      // fTasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
+
     }
   }
 }

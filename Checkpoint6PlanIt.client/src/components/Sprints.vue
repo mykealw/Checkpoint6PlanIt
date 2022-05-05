@@ -24,7 +24,7 @@
         <div class="d-flex"></div>
         <div class="d-flex">
           <h3 class="ms-5">
-            <!-- {{ weightTotal }}<i class="mdi mdi-weight me-5"></i> -->
+            {{ weightTotal }}<i class="mdi mdi-weight me-5"></i>
           </h3>
           <h3><i @click="deleteSprint()" class="mdi mdi-delete mx-3"></i></h3>
           <button
@@ -36,7 +36,7 @@
           >
             Create Task
           </button>
-          <h3>0/0 Completed</h3>
+          <h3>{{ completeTasks }}/{{ totalTasks }} Completed</h3>
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@ export default {
     //   }
     // })
     return {
-      // weight: computed(() => AppState.weight),
+      // weight,
       // totalWeight() ,
       // tasks,
       async setSprint() {
@@ -104,13 +104,32 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
+      // async addWeight(props) {
+      //   props.fTasks.forEach(t => {
+      //     let weight = 0
+      //     weight += t.weight
+      //     return weight
+      //   });
+      // },
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
       // weightTotal = computed(() => AppState.weight)
-      // weightTotal: computed(() => AppState.tasks.forEach(t => {
-      //   let total = 0
-      //   total += t.weight
-      //   return total
-      // }))
+      weightTotal: computed(() => {
+        const filtered = AppState.tasks.filter(t => t.sprintId == props.sprint.id)
+        let total = 0
+        filtered.forEach(t => {
+          total += t.weight
+        })
+        return total
+      }),
+      totalTasks: computed(() => {
+        const filtered = AppState.tasks.filter(t => t.sprintId == props.sprint.id)
+        return filtered.length
+      }),
+      completeTasks: computed(() => {
+        const filtered = AppState.tasks.filter(t => t.sprintId == props.sprint.id)
+        const complete = filtered.filter(f => f.isComplete)
+        return complete.length
+      })
     }
   }
 }
