@@ -51,7 +51,7 @@ export default {
           Pop.toast(error.message, "error");
         }
       },
-      
+
       sprints: computed(() => AppState.sprints)
 
     }

@@ -10,6 +10,7 @@
       <div class="accordion-header d-flex" id="headingOne">
         <h3>{{ sprint.name }}</h3>
         <h3 class="ms-5">{{ weight }}<i class="mdi mdi-weight"></i></h3>
+        <h3><i @click="deleteSprint()" class="mdi mdi-delete"></i></h3>
       </div>
       <div class="d-flex">
         <button
@@ -44,6 +45,8 @@ import { AppState } from '../AppState.js'
 import { logger } from '../utils/Logger.js'
 import { onMounted } from '@vue/runtime-core'
 import Pop from '../utils/Pop.js'
+import { sprintsService } from '../services/SprintsService.js'
+import { useRoute } from 'vue-router'
 export default {
   props: {
     sprint: {
@@ -52,6 +55,7 @@ export default {
     }
   },
   setup(props) {
+    const route = useRoute()
     let weight = 0
     onMounted(async () => {
       try {
@@ -74,7 +78,17 @@ export default {
         AppState.activeSprint = await props.sprint
         // logger.log(AppState.activeSprint)
       },
-
+      async deleteSprint() {
+        try {
+          if (await Pop.confirm()) {
+            await sprintsService.deleteSprint(props.sprint.id, route.params.projectId)
+          }
+        }
+        catch (error) {
+          logger.log("[error prefix]", error.message);
+          Pop.toast(error.message, "error");
+        }
+      },
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id))
     }
   }
