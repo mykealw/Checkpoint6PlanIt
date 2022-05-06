@@ -1,12 +1,14 @@
 <template>
   <h6
-    class="selectable p-3 border border-dark m-2 bg-light rounded"
+    class="selectable p-3 border border-dark m-2 bg-light rounded text-center"
     @click="editing = !editing"
+    title="Edit Task"
+    v-if="account"
   >
     Edit Task
     <i class="text-dark selectable ms-2 mdi mdi-pencil"></i>
   </h6>
-  <form v-if="editing == true" @submit.prevent="editTask()">
+  <form class="p-2" v-if="editing == true" @submit.prevent="editTask()">
     <div class="mb-3">
       <label for="taskName" class="form-label visually-hidden">Name</label>
       <input
@@ -19,8 +21,8 @@
         placeholder="Name..."
       />
     </div>
-    <div class="d-flex justify-content-between">
-      <div class="mb-3">
+    <div class="d-flex justify-content-between w-100">
+      <div class="mb-3 w-60">
         <label for="taskWeight" class="form-label visually-hidden"
           >Weight</label
         >
@@ -36,11 +38,12 @@
       </div>
       <div class="dropdown">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          class="btn bg-sGrad text-light dropdown-toggle"
           type="button"
           id="dropdownMenuButton1"
           data-bs-toggle="dropdown"
           aria-expanded="false"
+          title="Change task to a different Sprint"
         >
           Change Sprint
         </button>
@@ -58,59 +61,41 @@
         </ul>
       </div>
     </div>
-    <!-- <div class="d-flex justify-content-center">
-      <div class="form-check">
-        <input
-          type="checkbox"
-          class="form-check-input"
-          name=""
-          id=""
-          value="checkedValue"
-          :checked="task.isComplete"
-          @click="edit.isComplete = !edit.isComplete"
-        />
-        <label class="form-check-label" for=""> Display value </label>
+    <div class="d-flex justify-content-between">
+      <h5>Task Complete :</h5>
+      <div>
+        <button
+          class="btn bg-pGrad text-light"
+          type="button"
+          :disabled="!task.isComplete"
+          @click="completeTask(false)"
+          title="Task still needs work!"
+        >
+          Needs Work
+        </button>
+        <button
+          class="btn bg-sGrad text-light ms-2"
+          type="button"
+          :disabled="task.isComplete"
+          @click="completeTask(true)"
+          title="Task is complete!"
+        >
+          Finished!
+        </button>
       </div>
-
-      <button
-        class="btn btn-info me-3"
-        type="button"
-        :disabled="!task.isComplete"
-      >
-        Needs Work
-      </button>
-      <button
-        class="btn btn-info ms-3"
-        type="button"
-        :disabled="task.isComplete"
-        @click="completeTask(true)"
-      >
-        Finished!
-      </button>
-    </div> -->
-    <div class="d-flex justify-content-center">
-      <button
-        class="btn btn-info me-3"
-        type="button"
-        :disabled="!task.isComplete"
-        @click="completeTask(false)"
-      >
-        Needs Work
-      </button>
-      <button
-        class="btn btn-info ms-3"
-        type="button"
-        :disabled="task.isComplete"
-        @click="completeTask(true)"
-      >
-        Finished!
-      </button>
     </div>
-    <div class="d-flex justify-content-end mt-4">
-      <button type="button" data-bs-dismiss="modal" class="btn btn-danger me-2">
+    <div class="d-flex justify-content-end mt-5">
+      <button
+        type="button"
+        data-bs-dismiss="modal"
+        class="btn bg-pGrad text-light me-2"
+        title="Cancel"
+      >
         Cancel
       </button>
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn bg-sGrad text-light" title="Submit">
+        Submit
+      </button>
     </div>
   </form>
 </template>
@@ -166,7 +151,8 @@ export default {
           logger.log("[error prefix]", error.message);
           Pop.toast(error.message, "error");
         }
-      }
+      },
+      account: computed(() => AppState.account)
     }
   },
 }
@@ -174,4 +160,10 @@ export default {
 
 
 <style lang="scss" scoped>
+.w-60 {
+  width: 60%;
+}
+.w-40 {
+  width: 40%;
+}
 </style>

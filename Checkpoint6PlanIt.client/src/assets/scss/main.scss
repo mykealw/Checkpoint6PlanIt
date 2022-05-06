@@ -3,12 +3,14 @@
 @import "./_overrides.scss";
 @import "./utilities.scss";
 @import "./loaders.scss";
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
 
 #app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: $light;
+  font-family: 'Prompt', sans-serif;;
 }
 
 main {

@@ -1,12 +1,11 @@
 <template>
   <div class="row">
-    <div class="col-md-1 gx-0">
+    <div class="col-md-1 gx-0 py-3">
       <button
         class="btn bg-pGrad text-light mt-2 rnd"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#projects-list"
-        aria-controls="offcanvasRight"
         title="All Projects"
       >
         Projects
@@ -14,10 +13,10 @@
     </div>
     <div class="col-md-10">
       <div class="row">
-        <div class="col-12 w-50">
+        <div class="col-12 w-50 p-3 pb-0">
           <div class="d-flex">
             <h2>{{ activeProject.name }}</h2>
-            <h2>
+            <h2 v-if="account">
               <i
                 class="mdi mdi-delete ms-5 selectable"
                 @click="deleteProject"
@@ -27,20 +26,22 @@
           </div>
           <hr />
           <div>
-            <h5>{{ activeProject.description }}</h5>
+            <h5 class="mb-0">{{ activeProject.description }}</h5>
           </div>
         </div>
       </div>
       <hr />
       <div class="row">
         <div class="col-md-10">
-          <h3>Sprints</h3>
+          <h3>Sprints for the {{ activeProject.name }} project.</h3>
         </div>
         <div class="col-md-2 text-end">
           <button
             data-bs-toggle="modal"
             data-bs-target="#create-sprint"
-            class="btn btn-success m-auto"
+            class="btn bg-sGrad text-light m-auto"
+            title="Create Sprint"
+            v-if="account"
           >
             Create Sprint
           </button>
@@ -75,6 +76,7 @@
         v-for="p in projects"
         :key="p.id"
         @click="goToProject(p, p.id)"
+        :title="'Go to the ' + p.name + ' project.'"
       >
         <div>
           <h4>{{ p.name }}</h4>
@@ -154,6 +156,7 @@ export default {
       tasks: computed(() => AppState.tasks),
       projects: computed(() => AppState.projects),
       notes: computed(() => AppState.notes),
+      account: computed(() => AppState.account)
       // fTasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
 
     }
@@ -169,6 +172,9 @@ export default {
   border-top-left-radius: 0em;
   border-bottom-left-radius: 0em;
   height: 10vh;
-  width: 75%;
+  width: 90%;
+}
+.ml-0 {
+  margin-left: 0;
 }
 </style>

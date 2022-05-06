@@ -15,7 +15,7 @@ class TasksService {
     original.weight = update.weight || original.weight
     original.projectId = update.projectId || original.projectId
     original.sprintId = update.sprintId || original.sprintId
-    original.isComplete = update.isComplete || original.isComplete
+    original.isComplete = update.isComplete
     await original.save()
     return original
   }

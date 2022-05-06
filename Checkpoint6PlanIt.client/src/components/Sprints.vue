@@ -5,48 +5,60 @@
         d-flex
         justify-content-between
         selectable
-        bg-secondary
+        bg-pGrad
+        text-light
         border-dark border-top border-start border-end
+        rounded-top
+        p-2
       "
       aria-expanded="true"
-      aria-controls="collapseOne"
       data-bs-toggle="collapse"
       :data-bs-target="'#c-' + sprint.id"
+      :title="sprint.name"
     >
-      <div
-        class="accordion-header d-flex justify-content-between w-100"
-        id="headingOne"
-      >
-        <div class="">
+      <div class="accordion-header d-flex w-100" id="headingOne">
+        <div class="w-20">
           <h3>{{ sprint.name }}</h3>
         </div>
-        <div class="d-flex"></div>
-        <div class="d-flex"></div>
-        <div class="d-flex">
-          <h3 class="ms-5">
-            {{ weightTotal }}<i class="mdi mdi-weight me-5"></i>
-          </h3>
-          <h3><i @click="deleteSprint()" class="mdi mdi-delete mx-3"></i></h3>
+        <div class="w-20 d-flex justify-content-end">
+          <h3 class="me-3">{{ weightTotal }}</h3>
+          <h3><i class="mdi mdi-weight"></i></h3>
+        </div>
+        <div class="w-20 text-end me-2">
           <button
-            class="btn btn-success me-3"
+            class="btn bg-sGrad text-light me-3"
             type="button"
             data-bs-toggle="modal"
             data-bs-target="#create-task"
             @click="setSprint()"
+            title="Create Task"
+            v-if="account"
           >
             Create Task
           </button>
+        </div>
+        <div class="w-20 text-end">
           <h3>{{ completeTasks }}/{{ totalTasks }} Completed</h3>
+        </div>
+        <div class="w-20 text-end">
+          <h3>
+            <i
+              @click.stop="deleteSprint()"
+              class="mdi mdi-delete selectable"
+              title="Delete Sprint"
+              v-if="account"
+            ></i>
+          </h3>
         </div>
       </div>
     </div>
     <div
       :id="'c-' + sprint.id"
       class="accordion-collapse collapse border-dark border"
-      aria-labelledby="headingOne"
+      :aria-labelledby="'heading-' + sprint.name"
       data-bs-parent="#accordionExample"
     >
-      <div class="accordion-body">
+      <div class="accordion-body bg-sGrad text-light">
         <Tasks v-for="t in tasks" :key="t.id" :task="t" />
       </div>
     </div>
@@ -111,6 +123,7 @@ export default {
       //     return weight
       //   });
       // },
+      account: computed(() => AppState.account),
       tasks: computed(() => AppState.tasks.filter(t => t.sprintId == props.sprint.id)),
       // weightTotal = computed(() => AppState.weight)
       weightTotal: computed(() => {
@@ -137,4 +150,13 @@ export default {
 
 
 <style lang="scss" scoped>
+.w-20 {
+  width: 20%;
+}
+w-10 {
+  width: 10%;
+}
+w-40 {
+  width: 40%;
+}
 </style>

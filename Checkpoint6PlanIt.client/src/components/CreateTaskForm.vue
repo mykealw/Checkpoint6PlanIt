@@ -29,10 +29,17 @@
       />
     </div>
     <div class="d-flex justify-content-end">
-      <button type="button" data-bs-dismiss="modal" class="btn btn-danger me-2">
+      <button
+        type="button"
+        data-bs-dismiss="modal"
+        class="btn bg-pGrad me-2 text-light"
+        title="Cancel"
+      >
         Cancel
       </button>
-      <button type="submit" class="btn btn-success">Submit</button>
+      <button type="submit" class="btn bg-sGrad text-light" title="Submit">
+        Submit
+      </button>
     </div>
   </form>
 </template>

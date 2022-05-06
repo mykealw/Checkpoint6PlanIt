@@ -3,6 +3,7 @@
     class="offcanvas offcanvas-start"
     tabindex="-1"
     aria-labelledby="offcanvasRightLabel"
+    aria-hidden="true"
   >
     <div class="offcanvas-header">
       <h5 class="offcanvas-title">
@@ -13,6 +14,7 @@
         class="btn-close text-reset"
         data-bs-dismiss="offcanvas"
         aria-label="Close"
+        title="Close Modal"
       ></button>
     </div>
     <hr />

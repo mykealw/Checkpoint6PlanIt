@@ -39,8 +39,7 @@ class TasksService {
     if (index != -1) {
       AppState.tasks.splice(index, 1, res.data)
     }
-    debugger
-    logger.log(AppState.tasks.indexOf(edit.taskId), 'hot dawg')
+    // logger.log(AppState.tasks.indexOf(edit.taskId), 'hot dawg')
     // logger.log(AppState.tasks, "after")
   }
   async deleteNote(noteId, projectId) {

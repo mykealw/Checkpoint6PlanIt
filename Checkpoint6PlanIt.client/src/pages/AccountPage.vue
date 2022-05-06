@@ -116,7 +116,7 @@ export default {
 
 <style scoped>
 img {
-  max-width: 100px;
+  height: 15vh;
   border-radius: 50%;
 }
 </style>
