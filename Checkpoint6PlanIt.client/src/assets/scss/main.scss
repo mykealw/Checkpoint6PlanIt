@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: $body-bg;
+  background-color: $light;
 }
 
 main {
@@ -35,4 +35,17 @@ select {
 form:invalid button[type="submit"] {
   filter: grayscale(1);
   pointer-events: none;
+}
+
+.bg-pGrad {
+  background-image: linear-gradient(hsl(281, 66%, 47%), hsl(303, 66%, 47%));
+}
+.bg-sGrad {
+  background-image: linear-gradient(hsl(331, 90%, 62%), hsl(292, 90%, 62%));
+}
+.text-pGrad {
+  color: linear-gradient(hsl(281, 66%, 47%), hsl(303, 66%, 47%))
+}
+.text-sGrad {
+  color: linear-gradient(to 90deg, hsl(331, 90%, 62%), hsl(292, 90%, 62%))
 }

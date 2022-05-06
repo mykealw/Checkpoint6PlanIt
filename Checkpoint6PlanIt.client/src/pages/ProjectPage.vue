@@ -2,31 +2,39 @@
   <div class="row">
     <div class="col-md-1 gx-0">
       <button
-        class="btn btn-primary mt-2 rnd"
+        class="btn bg-pGrad text-light mt-2 rnd"
         type="button"
         data-bs-toggle="offcanvas"
         data-bs-target="#projects-list"
         aria-controls="offcanvasRight"
+        title="All Projects"
       >
         Projects
       </button>
     </div>
     <div class="col-md-10">
       <div class="row">
-        <div class="d-flex">
-          <h2>{{ activeProject.name }}</h2>
-          <h2>
-            <i
-              class="mdi mdi-delete ms-4 selectable"
-              @click="deleteProject"
-            ></i>
-          </h2>
+        <div class="col-12 w-50">
+          <div class="d-flex">
+            <h2>{{ activeProject.name }}</h2>
+            <h2>
+              <i
+                class="mdi mdi-delete ms-5 selectable"
+                @click="deleteProject"
+                title="Delete Project"
+              ></i>
+            </h2>
+          </div>
+          <hr />
+          <div>
+            <h5>{{ activeProject.description }}</h5>
+          </div>
         </div>
-        <h5>{{ activeProject.description }}</h5>
       </div>
+      <hr />
       <div class="row">
         <div class="col-md-10">
-          <h4>Sprints</h4>
+          <h3>Sprints</h3>
         </div>
         <div class="col-md-2 text-end">
           <button
@@ -60,7 +68,7 @@
   </Modal>
 
   <Offcanvas id="projects-list">
-    <template #title>Projects</template>
+    <template #title><h2>Projects</h2></template>
     <template #body>
       <div
         class="d-flex justify-content-between selectable"

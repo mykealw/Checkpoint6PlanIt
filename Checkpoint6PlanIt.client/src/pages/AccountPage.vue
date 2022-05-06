@@ -1,25 +1,26 @@
 <template>
-  <div class="row">
+  <div class="row p-3">
     <div class="col">
-      <img :src="account.picture" alt="its you silly" />
+      <img :src="account.picture" alt="its you silly" :title="account.name" />
     </div>
-    <div class="col">
-      <h1>Hello, {{ account.name }}</h1>
+    <div class="col-6 align-self-center d-flex justify-content-center">
+      <h2>Hello, {{ account.name }}</h2>
     </div>
-    <div class="col">
-      <h3>Here is your email: {{ account.email }}</h3>
+    <div class="col align-self-center">
+      <h5>{{ account.email }}</h5>
     </div>
   </div>
   <div class="col">
     <h4
-      class="selectable p-3 border border-dark m-2 bg-light rounded"
+      class="selectable p-3 border border-dark m-2 bg-light rounded text-center"
       @click="editing = true"
+      title="Edit Account"
     >
       Edit Account
       <i class="text-dark selectable ms-2 mdi mdi-pencil"></i>
     </h4>
   </div>
-  <form v-if="editing == true" @submit.prevent="editAccount()">
+  <form class="p-3" v-if="editing == true" @submit.prevent="editAccount()">
     <div class="mb-3">
       <label for="name" class="form-label">Name</label>
       <input
@@ -54,8 +55,14 @@
       />
     </div>
 
-    <button class="btn btn-danger" @click="editing = false">Cancel</button>
-    <button class="btn btn-success ms-2">Submit</button>
+    <button
+      class="btn bg-pGrad text-light"
+      @click="editing = false"
+      title="Cancel"
+    >
+      Cancel
+    </button>
+    <button class="btn bg-sGrad text-light ms-2" title="Submit">Submit</button>
   </form>
 </template>
 
@@ -110,5 +117,6 @@ export default {
 <style scoped>
 img {
   max-width: 100px;
+  border-radius: 50%;
 }
 </style>

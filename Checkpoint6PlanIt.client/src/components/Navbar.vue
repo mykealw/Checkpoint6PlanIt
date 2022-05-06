@@ -1,13 +1,16 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-pGrad shadow px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div
+        class="d-flex flex-column align-items-center"
+        title="PlanIt Home Page"
+      >
         <h1>PlanIt</h1>
       </div>
     </router-link>
     <button
       class="navbar-toggler"
-      type="button"
+      type="button "
       data-bs-toggle="collapse"
       data-bs-target="#navbarText"
       aria-controls="navbarText"
@@ -16,9 +19,7 @@
     >
       <span class="navbar-toggler-icon" />
     </button>
-    <div class="collapse navbar-collapse me-auto" id="navbarText">
-      
-      <!-- LOGIN COMPONENT HERE -->
+    <div class="collapse navbar-collapse" id="navbarText">
       <Login />
     </div>
   </nav>
@@ -43,5 +44,8 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+.bg-pGrad {
+  background-image: linear-gradient(hsl(281, 66%, 47%), hsl(303, 66%, 47%));
 }
 </style>

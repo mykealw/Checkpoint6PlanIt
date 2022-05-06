@@ -1,11 +1,17 @@
 <template>
-  <div class="col-md-5 selectable" @click.stop="goToProject()">
+  <div
+    class="col-md-5 selectable my-2"
+    @click.stop="goToProject()"
+    :title="project.name + ' Project Page'"
+  >
     <h3>{{ project.name }}</h3>
   </div>
-  <div class="col-md-5">
-    <img :src="project.creator.picture" alt="" />
+  <div class="col-md-5 align-self-center">
+    <img :src="project.creator.picture" alt="" :title="project.name" />
   </div>
-  <div class="col-md-2">{{ new Date(project.createdAt).toLocaleString() }}</div>
+  <div class="col-md-2 align-self-center">
+    {{ new Date(project.createdAt).toLocaleString() }}
+  </div>
 </template>
 
 
@@ -37,4 +43,8 @@ export default {
 
 
 <style lang="scss" scoped>
+img {
+  height: 7vh;
+  border-radius: 50%;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <span class="navbar-text">
+  <span class="navbar-text" title="Manage Account">
     <button
       class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0"
       @click="login"

@@ -1,29 +1,35 @@
 <template>
-  <div class="p-3 shadow mt-4 m-auto">
+  <div class="p-3 shadow mt-4 m-auto rounded">
     <div class="row">
-      <div class="col-md-10">
-        <h4>Projects</h4>
-        <h5>here are all {{ account.name }}'s active projects</h5>
+      <div class="col-md-10 bg-light">
+        <h2 class="w-50">
+          Projects
+          <hr />
+        </h2>
+
+        <h5>{{ account.name }}'s active projects</h5>
       </div>
-      <div class="col-md-2 m-auto">
+      <div class="col-md-2 m-auto" v-if="account">
         <button
           data-bs-toggle="modal"
           data-bs-target="#create-project"
-          class="btn btn-success m-auto"
+          class="btn bg-sGrad text-light m-auto"
+          title="Create Project"
         >
           Create Project
         </button>
       </div>
     </div>
+    <hr />
     <div class="row">
       <div class="col-md-5">
-        <h3>NAME</h3>
+        <h3 class="mb-0">NAME</h3>
       </div>
       <div class="col-md-5">
-        <h3>MEMBERS</h3>
+        <h3 class="mb-0">MEMBERS</h3>
       </div>
       <div class="col-md-2">
-        <h3>STARTED</h3>
+        <h3 class="mb-0">STARTED</h3>
       </div>
     </div>
     <hr />
@@ -69,21 +75,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card {
-    width: 50vw;
-    > img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
 </style>
