@@ -18,11 +18,11 @@
     >
       <div class="accordion-header d-flex w-100" id="headingOne">
         <div class="w-20">
-          <h3>{{ sprint.name }}</h3>
+          <h3 class="mb-0 vertical-align-center">{{ sprint.name }}</h3>
         </div>
         <div class="w-20 d-flex justify-content-end">
-          <h3 class="me-3">{{ weightTotal }}</h3>
-          <h3><i class="mdi mdi-weight"></i></h3>
+          <h4 class="me-3">{{ weightTotal }}</h4>
+          <h4><i class="mdi mdi-weight"></i></h4>
         </div>
         <div class="w-20 text-end me-2">
           <button
@@ -38,17 +38,19 @@
           </button>
         </div>
         <div class="w-20 text-end">
-          <h3>{{ completeTasks }}/{{ totalTasks }} Completed</h3>
+          <h4 class="mb-0 pt-1">
+            {{ completeTasks }}/{{ totalTasks }} Completed
+          </h4>
         </div>
         <div class="w-20 text-end">
-          <h3>
+          <h4>
             <i
               @click.stop="deleteSprint()"
               class="mdi mdi-delete selectable"
               title="Delete Sprint"
               v-if="account"
             ></i>
-          </h3>
+          </h4>
         </div>
       </div>
     </div>
