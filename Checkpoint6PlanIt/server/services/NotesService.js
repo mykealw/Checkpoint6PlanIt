@@ -7,6 +7,7 @@ class NotesService {
     return note
   }
   async deletedNote(noteId) {
+    // FIXME need to check the creator of the note against the person logged in with auth
     const noteToDelete = await dbContext.Notes.findByIdAndDelete(noteId)
     return noteToDelete
   }
